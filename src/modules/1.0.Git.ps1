@@ -32,13 +32,13 @@ $script:SetGitEditorEnvironmentVariable = {
 
 # Private function - configures Git editor
 $script:SetGitEditor = {
-	$getEditorScript = Resolve-Path "$PSScriptRoot\.git-editor\GetEditor.cmd"
+	$getEditorScript = "`"$(Resolve-Path "$PSScriptRoot\.git-editor\GetEditor.cmd")`""
 	$currentEditor = git config --global --get core.editor
 	
 	if ($currentEditor -ne $getEditorScript) {
 		# Escape backslashes and wrap in quotes for Git config
-		$escapedPath = $getEditorScript.Path.Replace('\', '\\')
-		git config --global core.editor "`"$escapedPath`""
+		# $escapedPath = $getEditorScript.Path.Replace('\', '\\')
+		git config --global core.editor $getEditorScript
 		$displayPath = $getEditorScript -replace [regex]::Escape($env:USERPROFILE), '$USERPROFILE'
 		return "git core.editor set to `"$displayPath`""
 	}

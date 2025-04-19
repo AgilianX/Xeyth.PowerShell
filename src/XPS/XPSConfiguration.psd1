@@ -12,7 +12,8 @@
         'XPSLoadScripts',
         'XPSRequire',
         'XPSRequireCommand',
-        'XPSRequireModule'
+        'XPSRequireModule',
+        'XPSRequireFont'
     )
     CmdletsToExport = @()
     VariablesToExport = '*'

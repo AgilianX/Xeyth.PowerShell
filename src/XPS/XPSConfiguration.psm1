@@ -32,6 +32,21 @@ function XPSConfigure { [CmdletBinding()]
     return $Messages
 }
 
+function XPSRequireFont { [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$FontName,
+        [Parameter(Mandatory = $false)][string]$helpUrl
+    )
+
+    $fonts = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+    $found = $fonts.PSObject.Properties.Name |
+        Where-Object { $_ -like "*$FontName*" }
+
+    $condition = $null -ne $found
+    XPSRequire -condition $condition -message "Required font '$FontName' not found." -helpUrl $helpUrl
+    return 
+}
+
 function XPSRequireCommand { [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$command,

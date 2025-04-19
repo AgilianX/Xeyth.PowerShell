@@ -10,16 +10,15 @@ if (-not (Test-Path $RepoPath)) {
     Write-Host "Using existing repo path: $RepoPath" -ForegroundColor Green
 }
 
-# Check and backup existing $PROFILE if it has content
-if ((Test-Path $PROFILE) -and ((Get-Content $PROFILE -ErrorAction SilentlyContinue | Where-Object { $_.Trim() -ne "" }))) {
-    $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-    $backupPath = "$PROFILE.$timestamp.bak"
-    Write-Host "Backing up existing profile to: $backupPath" -ForegroundColor Yellow
-    Copy-Item $PROFILE $backupPath -Force
-}
-
-# Ensure profile file exists
-if (-not (Test-Path $PROFILE)) {
+# Check and handle $PROFILE in a single block
+if (Test-Path $PROFILE) {
+    if ((Get-Content $PROFILE -ErrorAction SilentlyContinue | Where-Object { $_.Trim() -ne "" })) {
+        $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+        $backupPath = "$PROFILE.$timestamp.bak"
+        Write-Host "Backing up existing profile to: $backupPath" -ForegroundColor Yellow
+        Copy-Item $PROFILE $backupPath -Force
+    }
+} else {
     New-Item -Path $PROFILE -ItemType File -Force | Out-Null
 }
 

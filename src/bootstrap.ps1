@@ -24,7 +24,7 @@ if (-not (Test-Path $PROFILE)) {
 }
 
 # Write new bootstrap content
-$script:bootstrapLine = ". `"$RepoPath\profile.ps1`""
+$script:bootstrapLine = ". `"$RepoPath\src\profile.ps1`""
 Set-Content -Path $PROFILE -Value $bootstrapLine -Force
 
 Write-Host "`nBootstrap complete!" -ForegroundColor Green

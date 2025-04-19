@@ -21,4 +21,3 @@ iwr https://raw.githubusercontent.com/Xeythhhh/Xeyth.PowerShell/refs/heads/maste
 .\bootstrap.ps1 "D:\CustomPath\Xeyth.PowerShell"
 Remove-Item .\bootstrap.ps1
 ```
-

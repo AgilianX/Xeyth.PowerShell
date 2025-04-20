@@ -21,3 +21,7 @@ iwr https://raw.githubusercontent.com/Xeythhhh/Xeyth.PowerShell/refs/heads/maste
 .\bootstrap.ps1 "D:\CustomPath\Xeyth.PowerShell"
 Remove-Item .\bootstrap.ps1
 ```
+
+## Documentation
+
+For detailed documentation on the XPS Bootstrap framework, refer to the [PowerShell Documentation](docs/PowerShell.md).

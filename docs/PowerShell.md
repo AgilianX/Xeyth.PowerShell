@@ -72,10 +72,3 @@ The XPS Bootstrap framework is a modular and extensible system designed to strea
 ## Modules Documentation
 
 For detailed information about the XPS modules, refer to the [XPS Modules Documentation](modules/XPSModules.md).
-
-## Getting Started
-
-1. Clone the [repository](https://github.com/Xeythhhh/Xeyth.Resources).
-2. Copy the contents of the `PowerShell` folder to `$USERPROFILE\Documents\PowerShell`.
-3. Open a new PowerShell session to automatically load the configuration.
-4. Follow the on-screen instructions to install any missing dependencies.

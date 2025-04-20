@@ -42,6 +42,8 @@ Notes:
 | `revert`   | Reverts a previous commit                                   |
 | `learn`    | Files related to research (e.g. docs, instructions, etc)    |
 
+> Note: If the commit has [multiple types](#clarification-on-commit-types-with-mixed-changes), use the most relevant one. For example, if adds a feature,
+and documents it, use `feat`.
 ---
 
 ## 🧩 Metadata Footer Format
@@ -108,4 +110,11 @@ BREAKING CHANGE: Existing SSO flows must be updated
 
 ---
 
-> 📄 This is a living standard. As we add tools (e.g., changelogs, release notes, custom bots), we can expand supported `@key:` formats while preserving this ergonomic base.
+### Clarification on Commit Types with Mixed Changes
+
+If a commit contains both documentation and code changes, the commit type should reflect the most significant change. For example:
+
+- If the commit introduces a new feature and includes documentation for that feature, use `feat`.
+- If the commit fixes a bug and includes documentation for the fix, use `fix`.
+
+The `docs` type should only be used for commits that contain **only** documentation changes, with no other code modifications, it has the lowest significance. It should not be used if there are any other types of changes present.

@@ -13,11 +13,12 @@ $script:GitEditor = class GitEditor {
 $script:GetGitEditorBasedOnEnvironment = {
 	param([string]$parent)
 	switch -Regex ($parent) {
-		{ $_ -match "Code" }            { return [GitEditor]::new("code --wait", "VS Code") }
-		{ $_ -match "Cursor" }          { return [GitEditor]::new("cursor --wait", "Cursor") }
-		{ $_ -match "rider64" }         { return [GitEditor]::new("nano", "nano (via Rider)") }
-		{ $_ -match "ServiceHub.Host" } { return [GitEditor]::new("nano", "nano (via Visual Studio)") }
-		default                         { return [GitEditor]::new("nano", "nano (default)") }
+		{ $_ -match 'Code - Insiders' } { return [GitEditor]::new('code-insiders --wait', 'VS Code Insiders') }
+		{ $_ -match 'Code' } { return [GitEditor]::new('code --wait', 'VS Code') }
+		{ $_ -match 'Cursor' } { return [GitEditor]::new('cursor --wait', 'Cursor') }
+		{ $_ -match 'rider64' } { return [GitEditor]::new('nano', 'nano (via Rider)') }
+		{ $_ -match 'ServiceHub.Host' } { return [GitEditor]::new('nano', 'nano (via Visual Studio)') }
+		default { return [GitEditor]::new('nano', 'nano (default)') }
 	}
 }
 
@@ -25,7 +26,7 @@ $script:GetGitEditorBasedOnEnvironment = {
 $script:SetGitEditorEnvironmentVariable = {
 	$parent = (Get-Process -Id $PID).Parent.ProcessName
 	$editor = & $script:GetGitEditorBasedOnEnvironment $parent
-	
+
 	$env:XEYTH_GIT_EDITOR = $editor.Tool
 	return [XPSSuccess]::new("Environment editor: $($editor.Info)")
 }
@@ -34,7 +35,7 @@ $script:SetGitEditorEnvironmentVariable = {
 $script:SetGitEditor = {
 	$getEditorScript = "`"$(Resolve-Path "$PSScriptRoot\.git-editor\GetEditor.cmd")`""
 	$currentEditor = git config --global --get core.editor
-	
+
 	if ($currentEditor -ne $getEditorScript) {
 		# Escape backslashes and wrap in quotes for Git config
 		# $escapedPath = $getEditorScript.Path.Replace('\', '\\')
@@ -45,8 +46,8 @@ $script:SetGitEditor = {
 }
 
 # Public requirement checks
-XPSRequireCommand git "https://git-scm.com/downloads"
+XPSRequireCommand git 'https://git-scm.com/downloads'
 XPSRequireCommand nano "`nchoco install -y nano`nwinget install GNU.Nano"
 
 # Public configuration
-return XPSConfigure @({ & $SetGitEditor }, { & $SetGitEditorEnvironmentVariable })
+return XPSConfigure @( { & $SetGitEditor }, { & $SetGitEditorEnvironmentVariable })

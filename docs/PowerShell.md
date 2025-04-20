@@ -71,4 +71,4 @@ The XPS Bootstrap framework is a modular and extensible system designed to strea
 
 ## Modules Documentation
 
-For detailed information about the XPS modules, refer to the [XPS Modules Documentation](modules/XPSModules.md).
+For detailed information about the XPS modules, refer to the [XPS Modules Documentation](xps/XPSModules.md).

@@ -1,4 +1,4 @@
-# PowerShell script to fetch GitHub issues
+if (Get-Module XPSGitHub) { return }
 
 # Update the GetGitHubToken function to trim the token
 $script:GetGitHubToken = {

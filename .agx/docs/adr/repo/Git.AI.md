@@ -102,7 +102,9 @@ These aliases are designed to support our repository workflows:
 
 ## Setup Instructions
 
-> **Recommended**: Follow the repository setup guide in [.agx/docs/setup/README.md](../../setup/README.md) and run the initialization script.
+**Recommended**: Follow the repository setup guide in [.agx/docs/setup/README.md](../../setup/README.md) and run the initialization script.
+
+> When registering a new alias, simply run the initialization script again.
 
 The instructions below are provided **only for manual troubleshooting** in case you need to reconfigure the Git aliases module when things break:
 
@@ -121,7 +123,7 @@ The instructions below are provided **only for manual troubleshooting** in case 
 2. Verify aliases are working:
 
     ```bash
-    git agx-ai-lg
+    git agx-setup-test
     ```
 
 ## Why Aliases Are Necessary for AI Workflows
@@ -132,7 +134,7 @@ Several AI-assisted workflows depend on these aliases to operate effectively:
 
 2. **AI prompt execution**: Some prompt files like [ai.create-commit-message.prompt.md](../../../../.github/prompts/ai.create-commit-message.prompt.md) explicitly reference these aliases in their execution steps.
 
-3. **Consistent context gathering**: When agents need to understand repository state, these aliases ensure they receive consistent and sufficient information.
+3. **Consistent context gathering**: When agents need to understand repository state, these aliases ensure they receive consistent and sufficient information, free of halucinated extra arguments that come from training data around the command.
 
 4. **Enhanced collaboration**: By standardizing commands, we reduce the learning curve for new contributors and improve team efficiency.
 

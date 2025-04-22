@@ -4,16 +4,17 @@
 # Usage: .\install-aliases.ps1 [path\to\aliases\file]
 
 # Determine repository root
-try {
-    $REPO_ROOT = git rev-parse --show-toplevel
-    if ($LASTEXITCODE -ne 0) {
-        throw 'Not in a Git repository'
-    }
-}
+try { git rev-parse --show-toplevel > $null }
 catch {
     Write-Host '❌ Error: Not in a Git repository' -ForegroundColor Red
     exit 1
 }
+
+# Count existing Git-AgX aliases
+$existingCount = 0
+$existingAliases = git config --get-regexp '^alias\.agx-' | ForEach-Object { $_.Split(' ')[0].Substring(6) }
+$existingCount = $existingAliases.Count
+if ($existingCount -ne 0) { Write-Host "ℹ️  $existingCount Git-AgX aliases already configured" -ForegroundColor Cyan }
 
 # Get the aliases file path
 $ALIASES_FILE = if ($args[0]) { $args[0] } else { Join-Path $REPO_ROOT '.agx\aliases\agx.aliases' }
@@ -22,15 +23,11 @@ if (-not (Test-Path $ALIASES_FILE)) {
     exit 1
 }
 
-Write-Host "📌 Installing Git aliases from $ALIASES_FILE..." -ForegroundColor Cyan
-
 # Read the aliases file line by line
 $count = 0
 foreach ($line in Get-Content $ALIASES_FILE) {
     # Skip empty lines and comments
-    if ([string]::IsNullOrWhiteSpace($line) -or $line.StartsWith('#')) {
-        continue
-    }
+    if ([string]::IsNullOrWhiteSpace($line) -or $line.StartsWith('#')) { continue }
 
     # Parse the alias name and value
     $parts = $line -split ':', 2
@@ -62,4 +59,4 @@ foreach ($line in Get-Content $ALIASES_FILE) {
     }
 }
 
-Write-Host "✅ $count Git aliases installed successfully" -ForegroundColor Green
+if ($count -ne 0) { Write-Host "✅ $count Git-AgX aliases installed successfully" -ForegroundColor Green }

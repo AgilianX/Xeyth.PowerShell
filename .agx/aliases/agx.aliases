@@ -6,7 +6,12 @@
 agx-setup-test:status
 
 # Standard log format with more entries for AI context
-agx-ai-lg:!git --no-pager log --oneline -n 100
+#   - `agx-ai-*` will be used in ai prompts to enforce hallucination free commands
+#   - Sometimes agents like adding in their extra spice to well known commands and this behavior is not deterministic
+agx-ai-lg:!git --no-pager log -n 100
+agx-ai-diff-staged:!git --no-pager diff --staged
+agx-ai-status:status
+agx-ai-commit:commit
 
 # Add more aliases here, one per line
 # Example: agx-st:status -s

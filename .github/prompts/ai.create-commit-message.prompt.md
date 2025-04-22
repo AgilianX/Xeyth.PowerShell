@@ -7,13 +7,14 @@ Generate a standards-compliant commit message and execute the commit without use
 - For AI-related files (prompts, workflows, configs), prioritize the `ai` type.
 - Use context from relevant issues in the commit message when applicable.
 - Never include implementation details in messages.
-- Never run `git commit` with arguments - the editor must open for review.
+- Never use `git commit`, always use `git agx-ai-commit` WITHOUT ARGUMENTS to open the editor with the message for review.
 
 ---
 
 ## Step 1: Analysis
-- Run `git --no-pager diff --staged` to analyze staged changes
-- List open issues (`#list_issues` or equivalent)
+- Run `git agx-ai-diff-staged` to analyze staged changes
+- You can see the staged files with `git agx-ai-status`
+- List open issues using the `#list_issues` tool
 - Identify affected components and appropriate scope
 
 ## Step 2: Issue Correlation
@@ -38,21 +39,24 @@ Generate a standards-compliant commit message and execute the commit without use
 
 ## Step 4: Validation
 - Verify type and scope appropriateness per specification
+- Iterate at least 3 times and with each itteration, attempt to improve type, scope and compliance,
+remove obvious or repetitive information and rephrase to shorten the content where being explicit is not critical.
 - Ensure message is concise, clear, and focuses on WHAT changed (not HOW)
 - Check that bullet points add meaningful context
 
 ## Step 5: Finalize
 - Display the final draft message in a code block
-- Run `git commit` without arguments to open the editor with the message for review AFTER displaying the draft.
+- Run `git agx-ai-commit` to open the editor with the message for review AFTER displaying the draft.
 
 ---
 
 **Scopes:**
-- You can use `git  agx-ai-lg` to get inspiration on the commit message scopes to keep things consistent.
+- You can use `git agx-ai-lg` to get inspiration on the commit message scopes and types to keep things consistent.
+- You can also cross reference the output of `git agx-ai-lg` with the files present in `docs/research` for `learn(<scope>)` type commits.
 
 **Reminders:**
-- Never run `git log --oneline -n 20` with arguments. The editor needs to open the commit message for review.
 - Avoid assumptions. Omit optional metadata if unsure.
+- Only use the staged files to determine what the commit addresses.
 - Never leak implementation details in commit messages.
 - Prioritize clarity and full compliance with the [Commits.md](../../.agx/docs/conventions/Commits.md) specification.
 

@@ -38,11 +38,11 @@ Notes:
 | `style`    | Code style or formatting changes                                   |
 | `perf`     | Performance improvements                                           |
 | `revert`   | Reverts a previous commit                                          |
-| `repo`     | Changes to the repository itself (e.g. .gitignore, .git-hooks)     |
+| `repo`     | Changes to the repository itself (e.g. .gitignore,  git hooks)     |
 | `ci`       | CI/CD pipeline and build-related changes                           |
-| `ai`       | AI agent instructions, prompts, workflows, or configuration files. |
-| `docs`     | General documentation updates only.                                |
-| `learn`    | Files related to research (e.g. docs, instructions, etc)           |
+| `ai`       | AI agent instructions, prompts, workflows, or configuration files  |
+| `docs`     | Documentation of the source code or solutions provided in the repo |
+| `learn`    | Documentation related to research                                  |
 
 > Note: If the commit has [multiple types](#clarification-on-commit-types-with-mixed-changes), use the most relevant one. For example, if adds a feature,
 and documents it, use `feat`.
@@ -152,5 +152,6 @@ If a commit contains both documentation and code changes, the commit type should
 - If the commit introduces a new feature and includes documentation for that feature, use `feat`.
 - If the commit fixes a bug and includes documentation for the fix, use `fix`.
 - If the commit adds, updates, renames or removes AI agent instructions, prompts, workflows, or configuration (such as ai-instructions.*, or copilot related files), use `ai`.
+- For research documentation, between `docs` and `learn`, use `learn`.
 
 The `docs` or `learn` types should only be used for commits that contain **only** documentation changes, with no other code modifications, and do not affect AI agent instructions, prompts, workflows, or configuration. They have the lowest significance. They should not be used if there are any other types of changes present.

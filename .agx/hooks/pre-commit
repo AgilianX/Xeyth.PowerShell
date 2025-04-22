@@ -1,0 +1,16 @@
+#!/bin/sh
+# This hook runs before any Git commit
+
+# Get a list of staged files (not deleted) and check each for TODO
+FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+# Run each check script on staged files
+HOOK_DIR="$(dirname "$0")/checks"
+for script in "$HOOK_DIR"/*.sh; do
+    "$script" $FILES || exit 1
+
+done
+
+# All checks passed
+echo "✅ All checks passed. Proceeding with commit."
+exit 0

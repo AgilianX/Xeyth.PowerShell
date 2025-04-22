@@ -1,0 +1,12 @@
+# Repository-specific Git aliases
+# Format: alias:command (one per line)
+# Lines starting with # are ignored as comments
+
+# Simple status command for testing hook activation
+agx-setup-test:status
+
+# Standard log format with more entries for AI context
+agx-ai-lg:!git --no-pager log --oneline -n 100
+
+# Add more aliases here, one per line
+# Example: agx-st:status -s

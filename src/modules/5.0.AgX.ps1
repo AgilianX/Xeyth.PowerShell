@@ -16,7 +16,8 @@ $script:TestIsAgxSubmodule = {
 }
 
 $script:GetAgxSubmoduleInfo = {
-    $currentCommit = git ls-tree HEAD .agx 2>$null | ForEach-Object { ($_ -split '\s+')[-2] }
+    # Get the actual HEAD commit of the .agx submodule, not the pinned commit in the superproject
+    $currentCommit = git -C .agx rev-parse HEAD 2>$null
     $remote = git config -f .gitmodules --get submodule..agx.url 2>$null
     $branch = git config -f .gitmodules --get submodule..agx.branch 2>$null
     if (-not $branch) { $branch = 'master' }

@@ -14,7 +14,3 @@ $global:Xeyth = @{ XPS = @{ } }
 . (Join-Path -Path $Xeyth.XPS.Paths.Root -ChildPath 'security.ps1')
 . (Join-Path -Path $Xeyth.XPS.Paths.Root -ChildPath 'xps.ps1')
 . (Join-Path -Path $Xeyth.XPS.Paths.Root -ChildPath 'modules.ps1')
-
-if ($Xeyth.IsAgXEnvironment) {
-    Write-Host 'AgX environment detected.' -ForegroundColor Cyan
-}

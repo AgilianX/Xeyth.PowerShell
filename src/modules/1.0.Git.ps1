@@ -25,7 +25,7 @@ $script:GetGitEditorBasedOnEnvironment = {
 # Private function - sets environment variable for Git editor
 $script:SetGitEditorEnvironmentVariable = {
 	$parent = (Get-Process -Id $PID).Parent.ProcessName
-	$editor = & $script:GetGitEditorBasedOnEnvironment $parent
+	$editor = & $GetGitEditorBasedOnEnvironment $parent
 
 	$env:XEYTH_GIT_EDITOR = $editor.Tool
 	return [XPSSuccess]::new("Environment editor: $($editor.Info)")
